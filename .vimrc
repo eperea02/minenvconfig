@@ -2,8 +2,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+="${TOOLS}/Vundle.vim
-call vundle#begin("${TOOLS}/vundleplugins")
+set rtp+=/tmp/eperea/minenvconfig/Vundle.vim
+call vundle#begin("/tmp/eperea/minenvconfig/vundleplugins")
 Plugin 'VundleVim/Vundle.vim' "Do not remove this line
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
