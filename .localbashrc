@@ -7,6 +7,8 @@ export https_proxy=http://proxy-dmz.intel.com:912
 export http_proxy=http://proxy-dmz.intel.com:911
 export VIMINIT="source ${TOOLS}/.vimrc"
 export no_proxy=127.0.0.1,localhost,.intel.com
+# export PATH="$PATH:/usr/intel/bin"
+alias tmux="tmux -f $TMUX_CONF"
 
 set -o vi 
 
@@ -27,8 +29,8 @@ function gitBranch() {
 export PS1="\n${txtyel} ${bold}\u ${txtblu}$HOST ${normal}${txtwhi}in ${txtcyn}\w ${txtwhi}at ${txtblu}\$(date +'%T') ${txtred}\$(gitBranch)\n${txtcyn}> ${txtwhi}"
 
 function tml(){
-    tmux list-sessions
-  }
+  tmux list-sessions
+}
 
 function tmn(){
   tmux new -s $1

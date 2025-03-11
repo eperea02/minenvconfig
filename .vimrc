@@ -36,10 +36,15 @@ let g:rspec_command = "Dispatch rspec {spec}"
 
 "Repeat last command in the next tmux pane.
 " nnoremap <Leader>e :call <SID>TmuxNextWindow()<CR>
-nnoremap <Leader>e :call <SID>TmuxSendKeys()<CR>
+nnoremap <Leader>e :call <SID>TmuxRepeatRight()<CR>
 nnoremap <Leader>r :call <SID>RunCommand()<CR>
 nnoremap <Leader>c :call <SID>TmuxCreateDebugTerm()<CR>
 nnoremap <Leader>z :call <SID>TmuxZoomWindow()<CR>
+
+" Map Ctrl + S to save the file
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
+vnoremap <C-s> <Esc>:w<CR>gv
 
 if !exists("g:command")
     let g:command = "echo 'You can set command with let g:command=\"new cmd\"'"
@@ -72,7 +77,7 @@ function! s:TmuxCreateDebugTerm()
 endfunction
 
 function! s:TmuxRepeatRight()
-  silent! exec "!tmux select-pane -R && tmux send up enter && tmux select-pane -L"
+  silent! exec "!/usr/intel/bin/tmux select-pane -R && /usr/intel/bin/tmux send up enter && /usr/intel/bin/tmux select-pane -L"
   redraw!
 endfunction
 
@@ -155,12 +160,12 @@ set noautoindent
 "set makeprg=/usr/intel/bin/gmake 
 set laststatus=2
 set ruler       "show the position indicator in the lower right corner
-set expandtab   "use spaces instead of tab characters
 set incsearch " Like emacs isearch, go immediately to matches
 "set dictionary=/usr/dict/words " Where's the dictionary?
 "set keywordprg=ref             " How to look up keywords
 "set sm
 "set lisp
+set expandtab   "use spaces instead of tab characters
 set tabstop=2              "tab stop
 set softtabstop=2     "use the same value as shiftwidth
 set shiftwidth=2      "use 4 spaces when using autoindent/cindent
@@ -195,3 +200,5 @@ function! Tableize()
 endfunction
 
 nnoremap <Leader>f :call Tableize()<Esc>
+autocmd FileType * set tabstop=2 shiftwidth=2 expandtab
+
