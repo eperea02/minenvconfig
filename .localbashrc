@@ -26,7 +26,17 @@ function gitBranch() {
 
 export PS1="\n${txtyel} ${bold}\u ${txtblu}$HOST ${normal}${txtwhi}in ${txtcyn}\w ${txtwhi}at ${txtblu}\$(date +'%T') ${txtred}\$(gitBranch)\n${txtcyn}> ${txtwhi}"
 
+function tml(){
+    tmux list-sessions
+  }
 
+function tmn(){
+  tmux new -s $1
+}
+
+function tma(){
+  tmux attach -t $1
+}
 
 function mux() {
   tmuxinator $1 start
