@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+export TOOLS=/tmp/eperea/minenvconfig/
+
+export TMUX_CONF="${TOOLS}/.tmux.conf"
+export https_proxy=http://proxy-dmz.intel.com:912
+export http_proxy=http://proxy-dmz.intel.com:911
+export VIMINIT=source "${TOOLS}/.vimrc"
+export no_proxy=127.0.0.1,localhost,.intel.com
+
+
+txtcyn='\[\e[0;96m\]'
+txtred='\[\e[31m\]'
+txtyel='\[\e[0;33m\]'
+txtwhi='\[\e[37m\]'
+txtblu='\[\e[34m\]'
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+
+function gitBranch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+export PS1="\n${txtyel} ${bold}\u ${txtblu}$HOST ${normal}${txtwhi}in ${txtcyn}\w ${txtwhi}at ${txtblu}\$(date +'%T') ${txtred}\$(gitBranch)\n${txtcyn}> ${txtwhi}"
+
+
+
+function mux() {
+  tmuxinator $1 start
+}
+
+function gacp() {
+  # current_branch=$(git symbolic-ref -q --short HEAD)
+  git add .
+  git commit -m "$1"
+  ~/git-rebase-via-merge.sh
+  # git rebase -i main
+  # git push -fu
+  # git checkout $current_branch
+}
+
+function cd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~
+  else
+    builtin cd "$1"
+  fi
+  ls
+}
+
+function gcc() {
+  git add .
+  git commit -m "$1"
+}
+
+function gm() {
+  git checkout $BRANCH
+}
+
+function gp() {
+  git pull
+}
+
+function gpm() {
+  git checkout $BRANCH && git pull
+}
+
+function sb(){
+  export BRANCH=$1
+}
+function grebase() {
+  ~/git-rebase-via-merge.sh
+}
+
+function grim(){
+    git rebase -i $BRANCH
+}
+
+function gpfu(){
+  git push -fu
+}
+
+function gpsu(){
+  # git push set upstream
+  current_branch=$(git symbolic-ref --short HEAD)
+  git push --set-upstream origin $current_branch
+}
