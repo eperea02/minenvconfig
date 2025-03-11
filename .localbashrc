@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-export TOOLS=/tmp/eperea/minenvconfig/
+export TOOLS=/tmp/eperea/minenvconfig
 
 export TMUX_CONF="${TOOLS}/.tmux.conf"
 export https_proxy=http://proxy-dmz.intel.com:912
 export http_proxy=http://proxy-dmz.intel.com:911
-export VIMINIT=source "${TOOLS}/.vimrc"
+export VIMINIT="source ${TOOLS}/.vimrc"
 export no_proxy=127.0.0.1,localhost,.intel.com
 
 
