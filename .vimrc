@@ -22,6 +22,8 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-javascript'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'prettier/vim-prettier' 
+Plugin 'vim-python/python-syntax'
+Plugin 'github/copilot.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -33,6 +35,8 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = "Dispatch rspec {spec}"
+
+let g:copilot_enabled = v:true
 
 "Repeat last command in the next tmux pane.
 " nnoremap <Leader>e :call <SID>TmuxNextWindow()<CR>
